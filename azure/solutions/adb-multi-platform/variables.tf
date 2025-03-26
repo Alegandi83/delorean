@@ -14,7 +14,12 @@ variable "account_id" {
 }
 
 
-variable "location" {
+variable "eb_location" {
+  type        = string
+  description = "(Required) The location for the resources in this module"
+}
+
+variable "cm_location" {
   type        = string
   description = "(Required) The location for the resources in this module"
 }
@@ -24,7 +29,12 @@ variable "deploy_id" {
   description = "(Required) The global unique identifier for the owner of deployment: e.g. ag83"
 }
 
-variable "deploy_env" {
+variable "eb_deploy_env" {
+  type        = string
+  description = "(Required) The environment for the deployment: e.g. tf"
+}
+
+variable "cm_deploy_env" {
   type        = string
   description = "(Required) The environment for the deployment: e.g. tf"
 }
@@ -38,6 +48,27 @@ variable "deploy_ver" {
   type        = string
   description = "(Required) The version for the deployment: e.g. 001"
 }
+
+variable "eb_producer_name" {
+  type        = string
+  description = "(Required) The name of the producer workspace: e.g. producer"
+}
+
+variable "eb_consumer_name" {
+  type        = string
+  description = "(Required) The name of the consumer workspace: e.g. producer"
+}
+
+variable "cm_producer_name" {
+  type        = string
+  description = "(Required) The name of the producer workspace: e.g. producer"
+}
+
+variable "cm_consumer_name" {
+  type        = string
+  description = "(Required) The name of the consumer workspace: e.g. producer"
+}
+
 
 variable "spoke_vnet_address_space" {
   type        = string

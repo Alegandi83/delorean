@@ -1,6 +1,6 @@
 resource "databricks_grants" "catalog_bronze-grants" {
   depends_on = [databricks_catalog.bronze-catalog]
-  catalog    = "bronze_catalog"
+  catalog    = "platform_catalog"
   dynamic "grant" {
     for_each = toset(var.metastore_admins)
     content {

@@ -14,7 +14,7 @@ resource "databricks_grants" "storage-credential-grants" {
     for_each = toset(var.metastore_admins)
     content {
       principal  = grant.key
-      privileges = ["CREATE EXTERNAL LOCATION", "CREATE EXTERNAL TABLE", "READ FILES", "WRITE_FILES"]
+      privileges = ["CREATE EXTERNAL LOCATION", "CREATE EXTERNAL TABLE", "READ FILES", "WRITE_FILES", "MANAGE"]
     }
   }
 }
