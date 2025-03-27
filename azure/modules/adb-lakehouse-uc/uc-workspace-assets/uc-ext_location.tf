@@ -5,6 +5,7 @@ resource "databricks_external_location" "workspace-external-location" {
   credential_name = var.storage_credential_name
   comment         = "Created by TF"
   isolation_mode = "ISOLATION_MODE_ISOLATED"
+  force_destroy = true
 }
 
 resource "databricks_grants" "workspace-external-location-grants" {

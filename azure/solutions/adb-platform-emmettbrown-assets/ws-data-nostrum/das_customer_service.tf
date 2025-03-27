@@ -7,9 +7,23 @@ resource "databricks_catalog" "das_customer_service" {
   isolation_mode  = "ISOLATED"
 }
 
-resource "databricks_schema" "source2-schema" {
+resource "databricks_schema" "crm_customer_relationship_management_2" {
   depends_on    = [databricks_catalog.das_customer_service]
   catalog_name  = databricks_catalog.das_customer_service.name
-  name          = "das_source2"
+  name          = "crm_customer_relationship_management"
+  force_destroy = true
+}
+
+resource "databricks_schema" "hds_help_desk_software" {
+  depends_on    = [databricks_catalog.das_customer_service]
+  catalog_name  = databricks_catalog.das_customer_service.name
+  name          = "hds_help_desk_software"
+  force_destroy = true
+}
+
+resource "databricks_schema" "fms_feedback_management_systems" {
+  depends_on    = [databricks_catalog.das_customer_service]
+  catalog_name  = databricks_catalog.das_customer_service.name
+  name          = "fms_feedback_management_systems"
   force_destroy = true
 }

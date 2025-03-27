@@ -4,6 +4,7 @@ resource "databricks_external_location" "landing-external-location" {
   url             = var.landing_adls_path
   credential_name = var.storage_credential_name
   comment         = "Created by TF"
+  force_destroy   = true
 }
 
 resource "databricks_grants" "landing-external-location-grants" {

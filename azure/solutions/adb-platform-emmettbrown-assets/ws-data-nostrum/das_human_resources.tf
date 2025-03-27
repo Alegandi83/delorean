@@ -7,9 +7,30 @@ resource "databricks_catalog" "das_human_resources" {
   isolation_mode  = "ISOLATED"
 }
 
-resource "databricks_schema" "source5-schema" {
+resource "databricks_schema" "hrm_human_resource_management_systems" {
   depends_on    = [databricks_catalog.das_human_resources]
   catalog_name  = databricks_catalog.das_human_resources.name
-  name          = "das_source5"
+  name          = "hrm_human_resource_management_systems"
+  force_destroy = true
+}
+
+resource "databricks_schema" "pay_payroll_software" {
+  depends_on    = [databricks_catalog.das_human_resources]
+  catalog_name  = databricks_catalog.das_human_resources.name
+  name          = "pay_payroll_software"
+  force_destroy = true
+}
+
+resource "databricks_schema" "tms_talent_management_systems" {
+  depends_on    = [databricks_catalog.das_human_resources]
+  catalog_name  = databricks_catalog.das_human_resources.name
+  name          = "tms_talent_management_systems"
+  force_destroy = true
+}
+
+resource "databricks_schema" "lms_learning_management_systems" {
+  depends_on    = [databricks_catalog.das_human_resources]
+  catalog_name  = databricks_catalog.das_human_resources.name
+  name          = "lms_learning_management_systems"
   force_destroy = true
 }

@@ -7,9 +7,30 @@ resource "databricks_catalog" "das_manufacturing_and_procurement" {
   isolation_mode  = "ISOLATED"
 }
 
-resource "databricks_schema" "source7-schema" {
+resource "databricks_schema" "erp_enterprise_resource_planning_5" {
   depends_on    = [databricks_catalog.das_manufacturing_and_procurement]
   catalog_name  = databricks_catalog.das_manufacturing_and_procurement.name
-  name          = "das_source7"
+  name          = "erp_enterprise_resource_planning"
+  force_destroy = true
+}
+
+resource "databricks_schema" "mes_manufacturing_execution_systems" {
+  depends_on    = [databricks_catalog.das_manufacturing_and_procurement]
+  catalog_name  = databricks_catalog.das_manufacturing_and_procurement.name
+  name          = "mes_manufacturing_execution_systems"
+  force_destroy = true
+}
+
+resource "databricks_schema" "mrp_material_requirements_planning" {
+  depends_on    = [databricks_catalog.das_manufacturing_and_procurement]
+  catalog_name  = databricks_catalog.das_manufacturing_and_procurement.name
+  name          = "mrp_material_requirements_planning"
+  force_destroy = true
+}
+
+resource "databricks_schema" "scm_supply_chain_management" {
+  depends_on    = [databricks_catalog.das_manufacturing_and_procurement]
+  catalog_name  = databricks_catalog.das_manufacturing_and_procurement.name
+  name          = "scm_supply_chain_management"
   force_destroy = true
 }
