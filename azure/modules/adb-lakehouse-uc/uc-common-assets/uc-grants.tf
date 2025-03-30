@@ -9,4 +9,4 @@ resource "databricks_grants" "catalog_bronze-grants" {
       "CREATE_FUNCTION", "CREATE_TABLE", "MODIFY"]
     }
   }
-}
+} 

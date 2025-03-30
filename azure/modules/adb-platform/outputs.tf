@@ -3,6 +3,11 @@ output "platform_metastore_id" {
   value       = module.adb-lakehouse-uc-metastore.metastore_id
 }
 
+output "platform_global_metastore_id" {
+  description = "Global ID of the created Metastore. Used for delta sharing"
+  value       = module.adb-lakehouse-uc-metastore.global_metastore_id
+}
+
 output "producer_azure_resource_group_id" {
   description = "ID of the created Azure resource group"
   value       = module.adb-lakehouse-producer.azure_resource_group_id

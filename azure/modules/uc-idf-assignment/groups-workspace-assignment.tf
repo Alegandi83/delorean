@@ -1,16 +1,16 @@
-#retrieve existing AAD groups at Databricks account.
-#You would normally use AAD enterprise application to synch groups from AAD to databricks account: https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad
-resource "databricks_group" "account_groups" {
-  for_each     = var.account_groups
-  display_name = each.value["group_name"]
-  workspace_access = contains(each.value["permissions"], "ADMIN") ? true : false
-  databricks_sql_access = contains(each.value["permissions"], "ADMIN") ? true : false
-}
+# Assigning Databricks Account group to Databricks Workspace
+resource "databricks_mws_permission_assignment" "this" {
+  depends_on = [ databricks_group.this ]
+  for_each = {
+    for group in var.account_groups : group.name => group
+    if group.name != null
+  }
 
-resource "databricks_mws_permission_assignment" "groups-workspace-assignement" {
-  depends_on   = [databricks_group.account_groups]
-  for_each     = var.account_groups
   workspace_id = var.workspace_id
-  principal_id = databricks_group.account_groups[each.key].id
-  permissions  = each.value["permissions"]
+  principal_id = databricks_group.this[each.key].id
+  permissions  = each.value.permissions
+
+  lifecycle {
+    ignore_changes = [principal_id]
+  } 
 }

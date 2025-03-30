@@ -22,6 +22,30 @@ public_subnet_address_prefixes  = ["10.178.16.0/20"]
 
 metastore_admins                = ["alessandro.gandini@databricks.com"]
 
+eb_account_groups = [{
+  name                = "admins"
+  permissions         = ["ADMIN"]
+  users               = ["alessandro.gandini@databricks.com", "mattia.zeni@databricks.com", "luca.bolognesi@databricks.com"]
+  service_principals  = ["admin"]
+  }, {
+  name                = "users"
+  permissions         = ["USER"]
+  users               = ["lorenzo.tagliaferri@databricks.com", "davide.veneziano@databricks.com"]
+  service_principals  = ["user"]
+}]
+
+cm_account_groups = [{
+  name                = "admins"
+  permissions         = ["ADMIN"]
+  users               = ["alessandro.gandini@databricks.com", "mirco.meazzo@databricks.com", "luca.bolognesi@databricks.com"]
+  service_principals  = ["admin"]
+  }, {
+  name                = "users"
+  permissions         = ["USER"]
+  users               = ["federico.rizzo@databricks.com", "michele.lamarca@databricks.com"]
+  service_principals  = ["user"]
+}]
+
 tags = {
   Owner = "alessandro.gandini@databricks.com"
-}
+} 

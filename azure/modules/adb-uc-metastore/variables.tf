@@ -23,6 +23,11 @@ variable "metastore_name" {
   description = "the name of the metastore"
 }
 
+variable "delta_sharing_organization_name" {
+  type        = string
+  description = "the name of the platform. Used as delta sharing organization name"
+}
+
 variable "tags" {
   type        = map(string)
   description = "(Required) Map of tags to attach to resources"

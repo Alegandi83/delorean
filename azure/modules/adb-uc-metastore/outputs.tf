@@ -2,6 +2,11 @@ output "metastore_id" {
   value = databricks_metastore.databricks-metastore.id
 }
 
+output "global_metastore_id" {
+  value = databricks_metastore.databricks-metastore.global_metastore_id
+  description = "the global mestastore id of the metastore used for delta sharing"
+}
+
 output "access_connector_id" {
   value       = azurerm_databricks_access_connector.access_connector.id
   description = "the id of the access connector"

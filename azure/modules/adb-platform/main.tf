@@ -2,21 +2,14 @@ locals {
   metastore_name = "hub"
 }
 module "adb-lakehouse-uc-metastore" {
-  source                     = "../adb-uc-metastore"
-  metastore_storage_name     = "dls${var.deploy_id}${var.deploy_env}${local.metastore_name}${var.deploy_ver}"
-  metastore_name             = "mts-${var.deploy_id}-${var.deploy_env}-${local.metastore_name}-${var.deploy_ver}"
-  access_connector_name      = "dac-${var.deploy_id}-${var.deploy_env}-${local.metastore_name}-${var.deploy_ver}"
-  shared_resource_group_name = "rg-${var.deploy_id}-${var.deploy_env}-${local.metastore_name}-${var.deploy_ver}"
-  location                   = var.location
-  tags                       = merge(var.tags, { "Domain" = "${local.metastore_name}" })
-  providers = {
-    databricks = databricks.account
-  }
-}
-
-module "adb-lakehouse-uc-account-principals" {
-  source             = "../adb-lakehouse-uc/account-principals"
-  service_principals = var.service_principals
+  source                          = "../adb-uc-metastore"
+  metastore_storage_name          = "dls${var.deploy_id}${var.deploy_env}${local.metastore_name}${var.deploy_ver}"
+  metastore_name                  = "mts-${var.deploy_id}-${var.deploy_env}-${local.metastore_name}-${var.deploy_ver}"
+  access_connector_name           = "dac-${var.deploy_id}-${var.deploy_env}-${local.metastore_name}-${var.deploy_ver}"
+  shared_resource_group_name      = "rg-${var.deploy_id}-${var.deploy_env}-${local.metastore_name}-${var.deploy_ver}"
+  delta_sharing_organization_name = "azure:${var.location}:${var.deploy_id}-${var.platform_name}-${var.deploy_ver}"
+  location                        = var.location
+  tags                            = merge(var.tags, { "Domain" = "${local.metastore_name}" })
   providers = {
     databricks = databricks.account
   }
@@ -47,25 +40,21 @@ module "adb-lakehouse-producer" {
 
 
 module "adb-lakehouse-uc-idf-assignment" {
-  depends_on         = [module.adb-lakehouse-uc-account-principals]
+  depends_on         = [module.adb-lakehouse-producer]
   source             = "../uc-idf-assignment"
   workspace_id       = module.adb-lakehouse-producer.workspace_id
+  deploy_id          = var.deploy_id
+  deploy_env         = var.deploy_env
+  deploy_prj         = var.deploy_prj
+  deploy_ver         = var.deploy_ver
   metastore_id       = module.adb-lakehouse-uc-metastore.metastore_id
-  service_principals = var.service_principals
-  account_groups = {
-    "group1" = {
-      group_name  = "grp-${var.deploy_id}-${var.deploy_env}-${var.producer_name}-admins-${var.deploy_ver}"
-      permissions = ["ADMIN"]
-    },
-    "group2" = {
-      group_name  = "grp-${var.deploy_id}-${var.deploy_env}-${var.producer_name}-users-${var.deploy_ver}"
-      permissions = ["USER"]
-    }
-  }
+  component_name     = var.producer_name
+  account_groups     = var.account_groups
   providers = {
     databricks = databricks.account
   }
 }
+
 
 module "adb-lakehouse-consumer" {
   # With UC by default we need to explicitly create a UC metastore, otherwise it will be created automatically
@@ -93,21 +82,16 @@ module "adb-lakehouse-consumer" {
 
 
 module "adb-lakehouse-other-uc-idf-assignment" {
-  depends_on         = [module.adb-lakehouse-uc-account-principals]
+  depends_on         = [module.adb-lakehouse-consumer]
   source             = "../uc-idf-assignment"
   workspace_id       = module.adb-lakehouse-consumer.workspace_id
+  deploy_id          = var.deploy_id
+  deploy_env         = var.deploy_env
+  deploy_prj         = var.deploy_prj
+  deploy_ver         = var.deploy_ver
   metastore_id       = module.adb-lakehouse-uc-metastore.metastore_id
-  service_principals = var.service_principals
-  account_groups = {
-    "group1" = {
-      group_name  = "grp-${var.deploy_id}-${var.deploy_env}-${var.consumer_name}-admins-${var.deploy_ver}"
-      permissions = ["ADMIN"]
-    },
-    "group2" = {
-      group_name  = "grp-${var.deploy_id}-${var.deploy_env}-${var.consumer_name}-users-${var.deploy_ver}"
-      permissions = ["USER"]
-    }
-  }
+  component_name     = var.consumer_name
+  account_groups     = var.account_groups
   providers = {
     databricks = databricks.account
   }

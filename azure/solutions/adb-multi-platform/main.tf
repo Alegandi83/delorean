@@ -17,9 +17,11 @@ module "adb-platform-emmettbrown" {
   private_subnet_address_prefixes   = var.private_subnet_address_prefixes
   public_subnet_address_prefixes    = var.public_subnet_address_prefixes
   metastore_admins                  = var.metastore_admins
-  service_principals                = {}
+  account_groups                    = var.eb_account_groups  
+  platform_name                     = local.eb_platform_name
   tags                              = merge(var.tags, { "Domain" = "${local.eb_platform_name}" })
-}
+} 
+
 
 module "adb-platform-emmettbrown-producer-assets" {
   depends_on                        = [module.adb-platform-emmettbrown]
@@ -60,8 +62,9 @@ module "adb-platform-cablemaster" {
   spoke_vnet_address_space          = var.spoke_vnet_address_space
   private_subnet_address_prefixes   = var.private_subnet_address_prefixes
   public_subnet_address_prefixes    = var.public_subnet_address_prefixes
-  metastore_admins                  = var.metastore_admins
-  service_principals                = {}
+  metastore_admins                  = var.metastore_admins  
+  account_groups                    = var.cm_account_groups  
+  platform_name                     = local.cm_platform_name
   tags                              = merge(var.tags, { "Domain" = "${local.cm_platform_name}" })
 }
 
@@ -69,6 +72,8 @@ module "adb-platform-cablemaster-producer-assets" {
   depends_on                        = [module.adb-platform-cablemaster]
   source                            = "../adb-platform-cablemaster-assets/ws-producer"
   metastore_id                      = module.adb-platform-cablemaster.platform_metastore_id
+  recipient_id                      = module.adb-platform-emmettbrown.platform_global_metastore_id
+  recipient_name                    = local.eb_platform_name
   adls_path                         = module.adb-platform-cablemaster.producer_storage_url
   providers = {
     databricks = databricks.cablemaster-producer-workspace

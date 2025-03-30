@@ -96,22 +96,32 @@ variable "tags" {
   default     = {}
 }
 
-
 variable "create_resource_group" {
   type        = bool
   description = "(Optional) Creates resource group if set to true (default)"
   default     = true
 }
 
-
-variable "service_principals" {
-  type = map(object({
-    sp_id        = string
-    display_name = optional(string)
-    permissions  = list(string)
+variable "eb_account_groups" {
+  type = list(object({
+    name               = optional(string)
+    permissions        = optional(list(string))
+    users              = optional(set(string))
+    service_principals = optional(set(string))
   }))
-  default     = {}
-  description = "list of service principals we want to create at Databricks account"
+  description = "List of objects with these parameters -  group names to create, sets of users and/or service principals assigned to these groups"
+  default     = []
+}
+
+variable "cm_account_groups" {
+  type = list(object({
+    name               = optional(string)
+    permissions        = optional(list(string))
+    users              = optional(set(string))
+    service_principals = optional(set(string))
+  }))
+  description = "List of objects with these parameters -  group names to create, sets of users and/or service principals assigned to these groups"
+  default     = []
 }
 
 

@@ -8,21 +8,38 @@ variable "workspace_id" {
   description = "The ID of Databricks workspace"
 }
 
-variable "account_groups" {
-  type = map(object({
-    group_name  = string
-    permissions = list(string)
-  }))
-  default     = {}
-  description = "List of databricks account groups we want to assign to the workspace"
+variable "deploy_id" {
+  type        = string
+  description = "(Required) The global unique identifier for the owner of deployment: e.g. ag83"
 }
 
-variable "service_principals" {
-  type = map(object({
-    sp_id        = string
-    display_name = optional(string)
-    permissions  = list(string)
+variable "deploy_env" {
+  type        = string
+  description = "(Required) The environment for the deployment: e.g. tf"
+}
+
+variable "deploy_prj" {
+  type        = string
+  description = "(Required) The prject name for the deployment: e.g. test"
+}
+
+variable "deploy_ver" {
+  type        = string
+  description = "(Required) The version for the deployment: e.g. 001"
+}
+
+variable "component_name" {
+  type        = string
+  description = "(Required) The name of the component: e.g. producer or consumer" 
+}
+
+variable "account_groups" {
+  type = list(object({
+    name               = optional(string)
+    permissions        = optional(list(string))
+    users              = optional(set(string))
+    service_principals = optional(set(string))
   }))
-  default     = {}
-  description = "List of account-level service principals we want to assign to the workspace"
+  description = "List of objects with these parameters -  group names to create, sets of users and/or service principals assigned to these groups"
+  default     = []
 }

@@ -69,25 +69,28 @@ variable "metastore_admins" {
   description = "list of principals: service principals or groups that have metastore admin privileges"
 }
 
+
+variable "platform_name" {
+  type        = string
+  description = "the name of the platform. Used as delta sharing organization name. e.g. cablemaster"
+}
 variable "tags" {
   type        = map(string)
   description = "(Required) Map of tags to attach to resources"
   default     = {}
 }
 
-variable "service_principals" {
-  type = map(object({
-    sp_id        = string
-    display_name = optional(string)
-    permissions  = list(string)
+
+variable "account_groups" {
+  type = list(object({
+    name               = optional(string)
+    permissions        = optional(list(string))
+    users              = optional(set(string))
+    service_principals = optional(set(string))
   }))
-  default     = {}
-  description = "list of service principals we want to create at Databricks account"
+  description = "List of objects with these parameters -  group names to create, sets of users and/or service principals assigned to these groups"
+  default     = []
 }
-
-
-
-
 
 
 
