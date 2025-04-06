@@ -28,7 +28,7 @@ resource "databricks_schema" "sales_pipeline_review" {
   force_destroy = true
 }
 
-resource "databricks_schema" "ssales_inventory_analysis" {
+resource "databricks_schema" "sales_inventory_analysis" {
   depends_on    = [databricks_catalog.dap_sales_and_finance]
   catalog_name  = databricks_catalog.dap_sales_and_finance.name
   name          = "sales_inventory_analysis"

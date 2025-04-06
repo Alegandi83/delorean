@@ -14,7 +14,7 @@ resource "databricks_schema" "field_service_assistant" {
   force_destroy = true
 }
 
-resource "databricks_schema" "scustomer_service_analytics" {
+resource "databricks_schema" "customer_service_analytics" {
   depends_on    = [databricks_catalog.dap_customer_service]
   catalog_name  = databricks_catalog.dap_customer_service.name
   name          = "customer_service_analytics"
