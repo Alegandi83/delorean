@@ -6,7 +6,7 @@ data "databricks_node_type" "smallest" {
 
 resource "databricks_job" "this" {
   depends_on  = [databricks_repo.cablemaster]
-  name        = "Cablemaster Consumer Setup"
+  name        = "00 - Cablemaster Consumer Setup"
   description = "This Job executes the Cablemaster Consumer setup tasks."
 
 /*
@@ -44,6 +44,12 @@ resource "databricks_job" "this" {
     }
   }
 
+  task {
+    task_key = "dap_iot_setup"
+    notebook_task {
+      notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/cablemaster.git/consumer/dap_cablemaster/dap_iot/setup"
+    }
+  }
   
 /*
   task {

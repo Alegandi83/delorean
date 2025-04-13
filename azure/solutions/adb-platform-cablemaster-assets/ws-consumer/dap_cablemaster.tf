@@ -41,3 +41,10 @@ resource "databricks_schema" "dap_finance" {
   name          = "dap_finance"
   force_destroy = true
 }
+
+resource "databricks_schema" "dap_iot" {
+  depends_on    = [databricks_catalog.dap_cablemaster]
+  catalog_name  = databricks_catalog.dap_cablemaster.name
+  name          = "dap_iot"
+  force_destroy = true
+}
