@@ -18,3 +18,24 @@ variable "adls_path" {
   type        = string
   description = "The ADLS path of the workspace storage external location"
 }
+
+variable "sql_server_host" {
+  type        = string
+  description = "The host of the SQL logical server."
+}
+
+variable "sql_database_name" {
+  type        = string
+  description = "The host of the SQL logical server."
+}
+
+variable "sql_admin_usr" {
+  type        = string
+  description = "The administrator username of the SQL logical server."
+}
+
+variable "sql_admin_psw" {
+  type        = string
+  description = "The administrator password of the SQL logical server."
+  sensitive   = true
+}

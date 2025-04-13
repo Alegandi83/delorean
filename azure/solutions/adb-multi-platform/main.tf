@@ -1,4 +1,23 @@
 locals {
+  src_platform_name = "resources"
+}
+module "slq-database" {
+  source                            = "../../modules/sql-database"
+  resource_group_location           = var.cm_location
+  deploy_id                         = var.deploy_id
+  deploy_env                        = var.cm_deploy_env
+  deploy_prj                        = var.deploy_prj
+  deploy_ver                        = var.deploy_ver
+  component_name                    = local.src_platform_name 
+  admin_username                    = var.sql_admin_usr
+  admin_password                    = var.sql_admin_psw
+  tags                              = merge(var.tags, { "Domain" = "${local.src_platform_name}" })
+  providers = {
+    azurerm = azurerm
+  }
+}
+
+locals {
   eb_platform_name = "emmettbrown"
 }
 module "adb-platform-emmettbrown" {
@@ -69,12 +88,16 @@ module "adb-platform-cablemaster" {
 }
 
 module "adb-platform-cablemaster-producer-assets" {
-  depends_on                        = [module.adb-platform-cablemaster]
+  depends_on                        = [module.adb-platform-cablemaster, module.slq-database]
   source                            = "../adb-platform-cablemaster-assets/ws-producer"
   metastore_id                      = module.adb-platform-cablemaster.platform_metastore_id
   recipient_id                      = module.adb-platform-emmettbrown.platform_global_metastore_id
   recipient_name                    = local.eb_platform_name
   adls_path                         = module.adb-platform-cablemaster.producer_storage_url
+  sql_server_host                   = module.slq-database.sql_server_name
+  sql_database_name                 = module.slq-database.sql_database_name
+  sql_admin_usr                     = var.sql_admin_usr
+  sql_admin_psw                     = var.sql_admin_psw
   providers = {
     databricks = databricks.cablemaster-producer-workspace
   }

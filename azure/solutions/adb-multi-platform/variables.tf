@@ -124,6 +124,19 @@ variable "cm_account_groups" {
   default     = []
 }
 
+variable "sql_admin_usr" {
+  type        = string
+  description = "The administrator username of the SQL logical server."
+  default     = "azureadmin"
+}
+
+variable "sql_admin_psw" {
+  type        = string
+  description = "The administrator password of the SQL logical server."
+  sensitive   = true
+  default     = null
+}
+
 
 
 
