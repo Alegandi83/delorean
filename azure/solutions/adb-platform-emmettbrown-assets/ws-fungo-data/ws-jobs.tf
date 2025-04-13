@@ -8,6 +8,10 @@ resource "databricks_job" "this" {
 
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_marketing_and_advertising/customer_churn_analytics/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 
@@ -18,6 +22,10 @@ resource "databricks_job" "this" {
     }
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_marketing_and_advertising/marketing_campaign_optimization/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 
@@ -26,6 +34,10 @@ resource "databricks_job" "this" {
 
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_sales_and_finance/finance_portoflio_assistant/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 
@@ -36,6 +48,10 @@ resource "databricks_job" "this" {
     }
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_sales_and_finance/finance_portoflio_assistant/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 
@@ -43,6 +59,10 @@ resource "databricks_job" "this" {
     task_key = "Quality-Product_Quality_Inspection"
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_quality/product_quality_inspection/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 
@@ -51,6 +71,10 @@ resource "databricks_job" "this" {
 
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_supplychain_and_logistics/demand_forecasting/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 
@@ -59,6 +83,10 @@ resource "databricks_job" "this" {
 
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_customer_service/field_service_assistant/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 
@@ -69,6 +97,10 @@ resource "databricks_job" "this" {
     }
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_customer_service/customer_service_analytics/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 
@@ -79,6 +111,10 @@ resource "databricks_job" "this" {
     }
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_customer_service/customer_service_agent/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 

@@ -46,6 +46,7 @@ module "adb-platform-emmettbrown-producer-assets" {
   depends_on                        = [module.adb-platform-emmettbrown]
   source                            = "../adb-platform-emmettbrown-assets/ws-data-nostrum"
   metastore_id                      = module.adb-platform-emmettbrown.platform_metastore_id
+  workspace_url                     = module.adb-platform-emmettbrown.producer_workspace_url
   adls_path                         = module.adb-platform-emmettbrown.producer_storage_url
   providers = {
     databricks = databricks.emmettbrown-producer-workspace
@@ -56,7 +57,8 @@ module "adb-platform-emmettbrown-consumer-assets" {
   depends_on                        = [module.adb-platform-emmettbrown]
   source                            = "../adb-platform-emmettbrown-assets/ws-fungo-data"
   metastore_id                      = module.adb-platform-emmettbrown.platform_metastore_id
-  adls_path                        = module.adb-platform-emmettbrown.consumer_storage_url
+  workspace_url                     = module.adb-platform-emmettbrown.consumer_workspace_url
+  adls_path                         = module.adb-platform-emmettbrown.consumer_storage_url
   providers = {
     databricks = databricks.emmettbrown-consumer-workspace
   }
@@ -91,6 +93,7 @@ module "adb-platform-cablemaster-producer-assets" {
   depends_on                        = [module.adb-platform-cablemaster, module.slq-database]
   source                            = "../adb-platform-cablemaster-assets/ws-producer"
   metastore_id                      = module.adb-platform-cablemaster.platform_metastore_id
+  workspace_url                     = module.adb-platform-cablemaster.producer_workspace_url
   recipient_id                      = module.adb-platform-emmettbrown.platform_global_metastore_id
   recipient_name                    = local.eb_platform_name
   adls_path                         = module.adb-platform-cablemaster.producer_storage_url
@@ -107,7 +110,8 @@ module "adb-platform-cablemaster-consumer-assets" {
   depends_on                        = [module.adb-platform-cablemaster]
   source                            = "../adb-platform-cablemaster-assets/ws-consumer"
   metastore_id                      = module.adb-platform-cablemaster.platform_metastore_id
-  adls_path                        = module.adb-platform-cablemaster.consumer_storage_url
+  workspace_url                     = module.adb-platform-cablemaster.consumer_workspace_url
+  adls_path                         = module.adb-platform-cablemaster.consumer_storage_url
   providers = {
     databricks = databricks.cablemaster-consumer-workspace
   }

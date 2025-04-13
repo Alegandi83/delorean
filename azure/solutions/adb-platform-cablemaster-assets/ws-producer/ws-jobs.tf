@@ -14,6 +14,11 @@ resource "databricks_job" "this" {
 
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/cablemaster.git/producer/platform/dbdemos"
+
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
     }
   }
 

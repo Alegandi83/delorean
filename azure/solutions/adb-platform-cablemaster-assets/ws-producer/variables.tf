@@ -4,6 +4,11 @@ variable "metastore_id" {
   description = "the id of the metastore"
 }
 
+variable "workspace_url" {
+  type        = string
+  description = "the url of the workspace"
+}
+
 variable "recipient_id" {
   type        = string
   description = "Global ID of the recipient Metastore. Used for delta sharing"

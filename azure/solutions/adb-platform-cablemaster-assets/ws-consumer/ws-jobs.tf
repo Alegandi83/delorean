@@ -48,6 +48,11 @@ resource "databricks_job" "this" {
     task_key = "dap_iot_setup"
     notebook_task {
       notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/cablemaster.git/consumer/dap_cablemaster/dap_iot/setup"
+      base_parameters = {
+        "par_cloud"         = "AZURE"
+        "par_workspace_url" = var.workspace_url
+      }
+
     }
   }
   
