@@ -27,24 +27,88 @@ sql_admin_psw                   = "alegandi!123"
 eb_account_groups = [{
   name                = "admins"
   permissions         = ["ADMIN"]
-  users               = ["alessandro.gandini@databricks.com", "mattia.zeni@databricks.com", "luca.bolognesi@databricks.com"]
+  users               = ["alessandro.gandini@databricks.com", "luca.bolognesi@databricks.com"]
   service_principals  = ["admin"]
   }, {
-  name                = "users"
+  name                = "quality"
   permissions         = ["USER"]
-  users               = ["lorenzo.tagliaferri@databricks.com", "davide.veneziano@databricks.com"]
+  users               = ["andrea.calegari@databricks.com"]
   service_principals  = ["user"]
-}]
+  }
+, {
+  name                = "service"
+  permissions         = ["USER"]
+  users               = ["andrea.picasso@databricks.com"]
+  service_principals  = ["user"]
+  }
+, {
+  name                = "marketing"
+  permissions         = ["USER"]
+  users               = ["davide.veneziano@databricks.com"]
+  service_principals  = ["user"]
+  }
+, {
+  name                = "supplychain"
+  permissions         = ["USER"]
+  users               = ["federico.rizzo@databricks.com"]
+  service_principals  = ["user"]
+  }
+, {
+  name                = "sales"
+  permissions         = ["USER"]
+  users               = ["lorenzo.tagliaferri@databricks.com"]
+  service_principals  = ["user"]
+  }
+, {
+  name                = "digital"
+  permissions         = ["USER"]
+  users               = ["luca.borin@databricks.com"]
+  service_principals  = ["user"]
+  }
+, {
+  name                = "manufacturing"
+  permissions         = ["USER"]
+  users               = ["mattia.zeni@databricks.com"]
+  service_principals  = ["user"]
+  }
+, {
+  name                = "legal"
+  permissions         = ["USER"]
+  users               = ["michele.lamarca@databricks.com"]
+  service_principals  = ["user"]
+  }
+, {
+  name                = "brand"
+  permissions         = ["USER"]
+  users               = ["mirco.meazzo@databricks.com"]
+  service_principals  = ["user"]
+  }
+, {
+  name                = "talent"
+  permissions         = ["USER"]
+  users               = ["luca.bolognesi@databricks.com"]
+  service_principals  = ["user"]
+  }
+  ]
 
 cm_account_groups = [{
   name                = "admins"
   permissions         = ["ADMIN"]
-  users               = ["alessandro.gandini@databricks.com", "mirco.meazzo@databricks.com", "luca.bolognesi@databricks.com"]
+  users               = ["alessandro.gandini@databricks.com", "luca.bolognesi@databricks.com"]
   service_principals  = ["admin"]
   }, {
   name                = "users"
   permissions         = ["USER"]
-  users               = ["federico.rizzo@databricks.com", "michele.lamarca@databricks.com"]
+  users               = [
+    "andrea.calegari@databricks.com", 
+    "andrea.picasso@databricks.com", 
+    "davide.veneziano@databricks.com", 
+    "federico.rizzo@databricks.com",
+    "lorenzo.tagliaferri@databricks.com",
+    "luca.borin@databricks.com",
+    "mattia.zeni@databricks.com",
+    "michele.lamarca@databricks.com",
+    "mirco.meazzo@databricks.com"]
   service_principals  = ["user"]
 }]
 

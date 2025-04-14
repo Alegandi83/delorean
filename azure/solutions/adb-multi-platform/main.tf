@@ -45,6 +45,11 @@ module "adb-platform-emmettbrown" {
 module "adb-platform-emmettbrown-producer-assets" {
   depends_on                        = [module.adb-platform-emmettbrown]
   source                            = "../adb-platform-emmettbrown-assets/ws-data-nostrum"
+  deploy_id                         = var.deploy_id
+  deploy_env                        = var.eb_deploy_env
+  deploy_prj                        = var.deploy_prj
+  deploy_ver                        = var.deploy_ver
+  component_name                    = var.eb_producer_name 
   metastore_id                      = module.adb-platform-emmettbrown.platform_metastore_id
   workspace_url                     = module.adb-platform-emmettbrown.producer_workspace_url
   adls_path                         = module.adb-platform-emmettbrown.producer_storage_url
@@ -56,6 +61,11 @@ module "adb-platform-emmettbrown-producer-assets" {
 module "adb-platform-emmettbrown-consumer-assets" {
   depends_on                        = [module.adb-platform-emmettbrown]
   source                            = "../adb-platform-emmettbrown-assets/ws-fungo-data"
+  deploy_id                         = var.deploy_id
+  deploy_env                        = var.eb_deploy_env
+  deploy_prj                        = var.deploy_prj
+  deploy_ver                        = var.deploy_ver
+  component_name                    = var.eb_consumer_name 
   metastore_id                      = module.adb-platform-emmettbrown.platform_metastore_id
   workspace_url                     = module.adb-platform-emmettbrown.consumer_workspace_url
   adls_path                         = module.adb-platform-emmettbrown.consumer_storage_url
@@ -92,6 +102,11 @@ module "adb-platform-cablemaster" {
 module "adb-platform-cablemaster-producer-assets" {
   depends_on                        = [module.adb-platform-cablemaster, module.slq-database]
   source                            = "../adb-platform-cablemaster-assets/ws-producer"
+  deploy_id                         = var.deploy_id
+  deploy_env                        = var.cm_deploy_env
+  deploy_prj                        = var.deploy_prj
+  deploy_ver                        = var.deploy_ver
+  component_name                    = var.cm_producer_name 
   metastore_id                      = module.adb-platform-cablemaster.platform_metastore_id
   workspace_url                     = module.adb-platform-cablemaster.producer_workspace_url
   recipient_id                      = module.adb-platform-emmettbrown.platform_global_metastore_id
@@ -109,6 +124,11 @@ module "adb-platform-cablemaster-producer-assets" {
 module "adb-platform-cablemaster-consumer-assets" {
   depends_on                        = [module.adb-platform-cablemaster]
   source                            = "../adb-platform-cablemaster-assets/ws-consumer"
+  deploy_id                         = var.deploy_id
+  deploy_env                        = var.cm_deploy_env
+  deploy_prj                        = var.deploy_prj
+  component_name                    = var.cm_consumer_name 
+  deploy_ver                        = var.deploy_ver
   metastore_id                      = module.adb-platform-cablemaster.platform_metastore_id
   workspace_url                     = module.adb-platform-cablemaster.consumer_workspace_url
   adls_path                         = module.adb-platform-cablemaster.consumer_storage_url
