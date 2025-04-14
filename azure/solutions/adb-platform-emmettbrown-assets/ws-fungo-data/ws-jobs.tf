@@ -47,7 +47,7 @@ resource "databricks_job" "this" {
       task_key = "Sales_Finance-Finance_Portfolio_Assistant"
     }
     notebook_task {
-      notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_sales_and_finance/finance_portoflio_assistant/setup"
+      notebook_path = "/Workspace/Users/alessandro.gandini@databricks.com/emmettbrown.git/fungo_data/dap_sales_and_finance/sales_pipeline_review/setup"
       base_parameters = {
         "par_cloud"         = "AZURE"
         "par_workspace_url" = var.workspace_url
