@@ -21,8 +21,7 @@ private_subnet_address_prefixes = ["10.178.0.0/20"]
 public_subnet_address_prefixes  = ["10.178.16.0/20"]
 
 metastore_admins                = ["alessandro.gandini@databricks.com"]
-sql_admin_usr                   = "agandini"
-sql_admin_psw                   = "alegandi!123"
+
 
 eb_account_groups = [{
   name                = "admins"
