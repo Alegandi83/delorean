@@ -39,7 +39,7 @@ module "adb-lakehouse-producer" {
 }
 
 
-module "adb-lakehouse-uc-idf-assignment" {
+module "adb-lakehouse-uc-idf-assignment-producer" {
   depends_on         = [module.adb-lakehouse-producer]
   source             = "../uc-idf-assignment"
   workspace_id       = module.adb-lakehouse-producer.workspace_id
@@ -50,6 +50,7 @@ module "adb-lakehouse-uc-idf-assignment" {
   metastore_id       = module.adb-lakehouse-uc-metastore.metastore_id
   component_name     = var.producer_name
   account_groups     = var.account_groups
+  metastore_admins   = var.metastore_admins 
   providers = {
     databricks = databricks.account
   }
@@ -81,7 +82,7 @@ module "adb-lakehouse-consumer" {
 
 
 
-module "adb-lakehouse-other-uc-idf-assignment" {
+module "adb-lakehouse-uc-idf-assignment-consumer" {
   depends_on         = [module.adb-lakehouse-consumer]
   source             = "../uc-idf-assignment"
   workspace_id       = module.adb-lakehouse-consumer.workspace_id
@@ -92,6 +93,7 @@ module "adb-lakehouse-other-uc-idf-assignment" {
   metastore_id       = module.adb-lakehouse-uc-metastore.metastore_id
   component_name     = var.consumer_name
   account_groups     = var.account_groups
+  metastore_admins   = var.metastore_admins 
   providers = {
     databricks = databricks.account
   }

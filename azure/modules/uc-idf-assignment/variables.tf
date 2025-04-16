@@ -33,6 +33,11 @@ variable "component_name" {
   description = "(Required) The name of the component: e.g. producer or consumer" 
 }
 
+variable "metastore_admins" {
+  type        = list(string)
+  description = "list of principals: service principals or groups that have metastore admin privileges"
+}
+
 variable "account_groups" {
   type = list(object({
     name               = optional(string)

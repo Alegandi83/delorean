@@ -8,7 +8,8 @@ resource "databricks_job" "this" {
   depends_on  = [databricks_repo.cablemaster]
   name        = "00 - Cablemaster Producer Setup"
   description = "This Job executes the Cablemaster Producer setup tasks."
-
+  budget_policy_id  = var.budget_policy_id
+  
   task {
     task_key = "Install_DBDemos"
 

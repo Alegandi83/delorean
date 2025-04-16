@@ -52,7 +52,10 @@ module "adb-platform-emmettbrown-producer-assets" {
   component_name                    = var.eb_producer_name 
   metastore_id                      = module.adb-platform-emmettbrown.platform_metastore_id
   workspace_url                     = module.adb-platform-emmettbrown.producer_workspace_url
+  budget_policy_id                  = module.adb-platform-emmettbrown.producer_budget_policy_id
   adls_path                         = module.adb-platform-emmettbrown.producer_storage_url
+  github_usr                        = var.github_usr 
+  github_tkn                        = var.github_tkn 
   providers = {
     databricks = databricks.emmettbrown-producer-workspace
   }
@@ -68,7 +71,10 @@ module "adb-platform-emmettbrown-consumer-assets" {
   component_name                    = var.eb_consumer_name 
   metastore_id                      = module.adb-platform-emmettbrown.platform_metastore_id
   workspace_url                     = module.adb-platform-emmettbrown.consumer_workspace_url
+  budget_policy_id                  = module.adb-platform-emmettbrown.consumer_budget_policy_id 
   adls_path                         = module.adb-platform-emmettbrown.consumer_storage_url
+  github_usr                        = var.github_usr 
+  github_tkn                        = var.github_tkn 
   providers = {
     databricks = databricks.emmettbrown-consumer-workspace
   }
@@ -109,9 +115,12 @@ module "adb-platform-cablemaster-producer-assets" {
   component_name                    = var.cm_producer_name 
   metastore_id                      = module.adb-platform-cablemaster.platform_metastore_id
   workspace_url                     = module.adb-platform-cablemaster.producer_workspace_url
+  budget_policy_id                  = module.adb-platform-cablemaster.producer_budget_policy_id
+  adls_path                         = module.adb-platform-cablemaster.producer_storage_url
+  github_usr                        = var.github_usr 
+  github_tkn                        = var.github_tkn 
   recipient_id                      = module.adb-platform-emmettbrown.platform_global_metastore_id
   recipient_name                    = local.eb_platform_name
-  adls_path                         = module.adb-platform-cablemaster.producer_storage_url
   sql_server_host                   = module.slq-database.sql_server_name
   sql_database_name                 = module.slq-database.sql_database_name
   sql_admin_usr                     = var.sql_admin_usr
@@ -131,7 +140,10 @@ module "adb-platform-cablemaster-consumer-assets" {
   deploy_ver                        = var.deploy_ver
   metastore_id                      = module.adb-platform-cablemaster.platform_metastore_id
   workspace_url                     = module.adb-platform-cablemaster.consumer_workspace_url
+  budget_policy_id                  = module.adb-platform-cablemaster.consumer_budget_policy_id
   adls_path                         = module.adb-platform-cablemaster.consumer_storage_url
+  github_usr                        = var.github_usr 
+  github_tkn                        = var.github_tkn 
   providers = {
     databricks = databricks.cablemaster-consumer-workspace
   }

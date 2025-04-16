@@ -1,3 +1,6 @@
+# requirements
+# Databricks Account Entitlements: Account Admin | Marketplace Admin | Billing Admin
+# Azure Subscription: Owner
 tenant_id                       = "bf465dc7-3bc8-4944-b018-092572b5c20d"  
 subscription_id                 = "edd4cc45-85c7-4aec-8bf5-648062d519bf"
 account_id                      = "ccb842e7-2376-4152-b0b0-29fa952379b8"
@@ -21,6 +24,12 @@ private_subnet_address_prefixes = ["10.178.0.0/20"]
 public_subnet_address_prefixes  = ["10.178.16.0/20"]
 
 metastore_admins                = ["alessandro.gandini@databricks.com"]
+#sql_admin_usr                   = ""
+#sql_admin_psw                   = ""
+
+#github_usr                      = ""
+#github_tkn                      = ""
+
 
 
 eb_account_groups = [{
@@ -37,7 +46,7 @@ eb_account_groups = [{
 , {
   name                = "service"
   permissions         = ["USER"]
-  users               = ["andrea.picasso@databricks.com"]
+  users               = ["andrea.picasso@databricks.com", "ana.avdiaj@databricks.com"]
   service_principals  = ["user"]
   }
 , {

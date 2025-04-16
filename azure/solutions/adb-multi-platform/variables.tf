@@ -137,6 +137,13 @@ variable "sql_admin_psw" {
   default     = null
 }
 
+variable "github_usr" {
+  type        = string
+  description = "Github user to link databricks workspace to github"
+  sensitive   = true
+  default     = null
+}
+
 variable "github_tkn" {
   type        = string
   description = "Github token to link databricks workspace to github"

@@ -8,6 +8,7 @@ resource "databricks_job" "this" {
   depends_on  = [databricks_repo.cablemaster]
   name        = "00 - Cablemaster Consumer Setup"
   description = "This Job executes the Cablemaster Consumer setup tasks."
+  budget_policy_id  = var.budget_policy_id
 
 /*
   job_cluster {

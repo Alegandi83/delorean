@@ -34,6 +34,29 @@ variable "workspace_url" {
   description = "the url of the workspace"
 }
 
+variable "budget_policy_id" {
+  type        = string
+  description = "the id of the workspace budget policy"
+}
+
+variable "adls_path" {
+  type        = string
+  description = "The ADLS path of the workspace storage external location"
+}
+
+variable "github_usr" {
+  type        = string
+  description = "Github user to link databricks workspace to github"
+  sensitive   = true
+  default     = null
+}
+variable "github_tkn" {
+  type        = string
+  description = "Github token to link databricks workspace to github"
+  sensitive   = true
+  default     = null
+}
+
 variable "recipient_id" {
   type        = string
   description = "Global ID of the recipient Metastore. Used for delta sharing"
@@ -42,11 +65,6 @@ variable "recipient_id" {
 variable "recipient_name" {
   type        = string
   description = "Name of the recipient. Used for delta sharing"
-}
-
-variable "adls_path" {
-  type        = string
-  description = "The ADLS path of the workspace storage external location"
 }
 
 variable "sql_server_host" {
