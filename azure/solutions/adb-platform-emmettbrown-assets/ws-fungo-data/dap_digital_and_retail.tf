@@ -21,13 +21,6 @@ resource "databricks_schema" "product_recommendation" {
   force_destroy = true
 }
 
-resource "databricks_schema" "personalized_recommendations" {
-  depends_on    = [databricks_catalog.dap_digital_and_retail]
-  catalog_name  = databricks_catalog.dap_digital_and_retail.name
-  name          = "personalized_recommendations"
-  force_destroy = true
-}
-
 resource "databricks_schema" "social_engagement" {
   depends_on    = [databricks_catalog.dap_digital_and_retail]
   catalog_name  = databricks_catalog.dap_digital_and_retail.name
