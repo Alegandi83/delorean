@@ -1,3 +1,8 @@
+variable "tenant_id" {
+  type        = string
+  description = "Azure tentant ID, required for key vault"
+}
+
 variable "resource_group_location" {
   type        = string
   description = "Location for all resources."

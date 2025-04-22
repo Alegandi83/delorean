@@ -8,4 +8,6 @@ resource "databricks_budget_policy" "bdg_pl" {
     key = "component"
     value = var.component_name
   }]
+
+  provider = databricks.account
 }

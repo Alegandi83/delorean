@@ -32,6 +32,7 @@ metastore_admins                = ["alessandro.gandini@databricks.com"]
 
 
 
+
 eb_account_groups = [{
   name                = "admins"
   permissions         = ["ADMIN"]
@@ -41,63 +42,64 @@ eb_account_groups = [{
   name                = "quality"
   permissions         = ["USER"]
   users               = ["andrea.calegari@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["quality"]
   }
 , {
   name                = "service"
   permissions         = ["USER"]
   users               = ["andrea.picasso@databricks.com", "ana.avdiaj@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["service"]
   }
 , {
   name                = "marketing"
   permissions         = ["USER"]
   users               = ["davide.veneziano@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["marketing"]
   }
 , {
   name                = "supplychain"
   permissions         = ["USER"]
   users               = ["federico.rizzo@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["supplychain"]
   }
 , {
   name                = "sales"
   permissions         = ["USER"]
   users               = ["lorenzo.tagliaferri@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["sales"]
   }
 , {
   name                = "digital"
   permissions         = ["USER"]
   users               = ["luca.borin@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["digital"]
   }
 , {
   name                = "manufacturing"
   permissions         = ["USER"]
   users               = ["mattia.zeni@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["manufacturing"]
   }
 , {
   name                = "legal"
   permissions         = ["USER"]
   users               = ["michele.lamarca@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["legal"]
   }
 , {
   name                = "brand"
   permissions         = ["USER"]
   users               = ["mirco.meazzo@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["brand"]
   }
 , {
   name                = "talent"
   permissions         = ["USER"]
   users               = ["luca.bolognesi@databricks.com"]
-  service_principals  = ["user"]
+  service_principals  = ["talent"]
   }
   ]
+
 
 cm_account_groups = [{
   name                = "admins"
@@ -119,6 +121,7 @@ cm_account_groups = [{
     "mirco.meazzo@databricks.com"]
   service_principals  = ["user"]
 }]
+
 
 tags = {
   Owner = "alessandro.gandini@databricks.com"

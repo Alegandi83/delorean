@@ -52,7 +52,8 @@ module "adb-lakehouse-uc-idf-assignment-producer" {
   account_groups     = var.account_groups
   metastore_admins   = var.metastore_admins 
   providers = {
-    databricks = databricks.account
+    databricks.account    = databricks.account
+    databricks.workspace  = databricks.producer-workspace
   }
 }
 
@@ -93,9 +94,10 @@ module "adb-lakehouse-uc-idf-assignment-consumer" {
   metastore_id       = module.adb-lakehouse-uc-metastore.metastore_id
   component_name     = var.consumer_name
   account_groups     = var.account_groups
-  metastore_admins   = var.metastore_admins 
+  metastore_admins   = var.metastore_admins
   providers = {
-    databricks = databricks.account
+    databricks.account    = databricks.account
+    databricks.workspace  = databricks.consumer-workspace
   }
 }
 

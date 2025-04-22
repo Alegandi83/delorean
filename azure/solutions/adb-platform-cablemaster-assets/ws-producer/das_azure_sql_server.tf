@@ -5,6 +5,7 @@ resource "databricks_catalog" "das_azure_sql_database" {
   connection_name = databricks_connection.azure_sql_db.name
   comment         = "Managed from Terraform"
   isolation_mode  = "ISOLATED"
+  force_destroy = true
   options = {
     database = var.sql_database_name
   }

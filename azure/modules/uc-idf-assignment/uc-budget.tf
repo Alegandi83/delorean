@@ -1,4 +1,5 @@
 resource "databricks_budget" "this" {
+  provider = databricks.account
   display_name = "bdg-${var.deploy_id}-${var.deploy_env}-${var.component_name}-${var.deploy_ver}"
 
   alert_configurations {

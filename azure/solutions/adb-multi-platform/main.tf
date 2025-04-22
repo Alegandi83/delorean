@@ -2,7 +2,8 @@ locals {
   src_platform_name = "resources"
 }
 module "slq-database" {
-  source                            = "../../modules/sql-database"
+  source                            = "../../modules/az-resources"
+  tenant_id                         = var.tenant_id 
   resource_group_location           = var.cm_location
   deploy_id                         = var.deploy_id
   deploy_env                        = var.cm_deploy_env
