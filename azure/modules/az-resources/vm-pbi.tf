@@ -1,4 +1,3 @@
-# Creare una virtual network
 resource "azurerm_virtual_network" "vnet" {
   name                = "avn-${var.deploy_id}-${var.deploy_env}-vmpbi-${var.deploy_ver}"
   address_space       = ["10.0.0.0/16"]
@@ -6,7 +5,6 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-# Creare una subnet
 resource "azurerm_subnet" "subnet" {
   name                 = "asb-${var.deploy_id}-${var.deploy_env}-vmpbi-${var.deploy_ver}"
   resource_group_name  = azurerm_resource_group.rg.name
@@ -14,13 +12,12 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-# Creare un gruppo di sicurezza di rete per la VM
 resource "azurerm_network_security_group" "powerbi_nsg" {
   name                = "nsg-${var.deploy_id}-${var.deploy_env}-vmpbi-${var.deploy_ver}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
-  # Regola per consentire RDP
+  # Rule to allow RDP
   security_rule {
     name                       = "RDP"
     priority                   = 1000
@@ -48,7 +45,7 @@ resource "azurerm_network_interface" "powerbi_nic" {
   }
 }
 
-# Creare un IP pubblico per la VM
+# VM Public IP
 resource "azurerm_public_ip" "powerbi_pip" {
   name                = "pip-${var.deploy_id}-${var.deploy_env}-vmpbi-${var.deploy_ver}"
   resource_group_name = azurerm_resource_group.rg.name
@@ -56,13 +53,12 @@ resource "azurerm_public_ip" "powerbi_pip" {
   allocation_method   = "Static"
 }
 
-# Associare l'interfaccia di rete al gruppo di sicurezza
 resource "azurerm_network_interface_security_group_association" "powerbi_nsg_association" {
   network_interface_id      = azurerm_network_interface.powerbi_nic.id
   network_security_group_id = azurerm_network_security_group.powerbi_nsg.id
 }
 
-# Creare un account di archiviazione per la diagnostica di avvio
+# Start diagnostic storage account
 resource "azurerm_storage_account" "powerbi_storage" {
   name                     = "dls${var.deploy_id}${var.deploy_env}vmpbi${var.deploy_ver}"
   resource_group_name      = azurerm_resource_group.rg.name
@@ -71,13 +67,12 @@ resource "azurerm_storage_account" "powerbi_storage" {
   account_replication_type = "LRS"
 }
 
-# Creare la VM Windows
 resource "azurerm_windows_virtual_machine" "powerbi_vm" {
   name                = "avm-${var.deploy_id}-${var.deploy_env}-vmpbi-${var.deploy_ver}"
   computer_name       = "vmpbi"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  size                = "Standard_D4s_v3"  # Dimensione consigliata per Power BI Desktop
+  size                = "Standard_D4s_v3"  # Suggested size for Power BI Desktop VM
   admin_username      = var.admin_username
   admin_password      = var.admin_password
   network_interface_ids = [
@@ -103,8 +98,8 @@ source_image_reference {
   }
 }
 
-/*
-# Installare Power BI Desktop usando l'estensione VM
+
+# Install Power BI Desktop using VM extension
 resource "azurerm_virtual_machine_extension" "powerbi_install" {
   name                 = "InstallPowerBIDesktop"
   virtual_machine_id   = azurerm_windows_virtual_machine.powerbi_vm.id
@@ -112,23 +107,26 @@ resource "azurerm_virtual_machine_extension" "powerbi_install" {
   type                 = "CustomScriptExtension"
   type_handler_version = "1.10"
 
+/*
+# uploaded script to install Power BI Desktop
   settings = <<SETTINGS
     {
       "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File powerbi_install.ps1",
       "fileUris": ["https://storageaccount.blob.core.windows.net/scripts/powerbi_install.ps1"]
     }
   SETTINGS
+*/
 
-  # Oppure, se preferisci includere lo script direttamente:
+  # Inline Script to install Power BI Desktop
   protected_settings = <<PROTECTED_SETTINGS
     {
       "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -Command \"[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://download.microsoft.com/download/8/8/0/880BCA75-79DD-466A-927D-1ABF1F5454B0/PBIDesktopSetup_x64.exe' -OutFile 'C:\\PBIDesktopSetup.exe'; Start-Process -FilePath 'C:\\PBIDesktopSetup.exe' -ArgumentList '-quiet', '-norestart', 'ACCEPT_EULA=1' -Wait; Remove-Item 'C:\\PBIDesktopSetup.exe'\""
     }
   PROTECTED_SETTINGS
 }
-*/
 
-# Output per recuperare l'indirizzo IP pubblico e la password della VM
+
+# Output to retrieve VM public ip address
 output "powerbi_vm_public_ip" {
   value = azurerm_public_ip.powerbi_pip.ip_address
 }
