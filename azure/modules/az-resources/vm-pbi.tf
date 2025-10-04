@@ -26,7 +26,7 @@ resource "azurerm_network_security_group" "powerbi_nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
-    source_address_prefix      = "*"
+    source_address_prefix      = "1.0.0.0/8"
     destination_address_prefix = "*"
   }
 }
@@ -37,13 +37,15 @@ resource "azurerm_network_interface" "powerbi_nic" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
+
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.powerbi_pip.id
+  //  public_ip_address_id          = azurerm_public_ip.powerbi_pip.id
   }
 }
+
 
 # VM Public IP
 resource "azurerm_public_ip" "powerbi_pip" {
@@ -98,7 +100,7 @@ source_image_reference {
   }
 }
 
-
+/*
 # Install Power BI Desktop using VM extension
 resource "azurerm_virtual_machine_extension" "powerbi_install" {
   name                 = "InstallPowerBIDesktop"
@@ -107,7 +109,7 @@ resource "azurerm_virtual_machine_extension" "powerbi_install" {
   type                 = "CustomScriptExtension"
   type_handler_version = "1.10"
 
-/*
+
 # uploaded script to install Power BI Desktop
   settings = <<SETTINGS
     {
@@ -115,7 +117,7 @@ resource "azurerm_virtual_machine_extension" "powerbi_install" {
       "fileUris": ["https://storageaccount.blob.core.windows.net/scripts/powerbi_install.ps1"]
     }
   SETTINGS
-*/
+
 
   # Inline Script to install Power BI Desktop
   protected_settings = <<PROTECTED_SETTINGS
@@ -124,7 +126,7 @@ resource "azurerm_virtual_machine_extension" "powerbi_install" {
     }
   PROTECTED_SETTINGS
 }
-
+*/
 
 # Output to retrieve VM public ip address
 output "powerbi_vm_public_ip" {

@@ -28,10 +28,12 @@ output "producer_budget_policy_id" {
   value       = module.adb-lakehouse-uc-idf-assignment-producer.budget_policy_id
 }
 
+
 output "producer_storage_url" {
   description = "The Databricks producer storage URL"
   value       = module.adb-lakehouse-producer-workspace-assets.adls_path
 }
+
 
 output "consumer_azure_resource_group_id" {
   description = "ID of the created Azure resource group"
@@ -53,7 +55,9 @@ output "consumer_budget_policy_id" {
   value       = module.adb-lakehouse-uc-idf-assignment-consumer.budget_policy_id
 }
 
+
 output "consumer_storage_url" {
   description = "The Databricks consumer storage URL"
   value       = module.adb-lakehouse-consumer-workspace-assets.adls_path
 }
+

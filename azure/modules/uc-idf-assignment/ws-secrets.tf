@@ -1,4 +1,5 @@
 resource "databricks_secret_scope" "scr_scope" {
+  depends_on = [ databricks_mws_permission_assignment.this ]
   provider  = databricks.workspace
   name      = "scp-${var.deploy_id}-${var.deploy_env}-${var.component_name}-${var.deploy_ver}"
 }

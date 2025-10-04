@@ -18,6 +18,7 @@ module "slq-database" {
   }
 }
 
+
 locals {
   eb_platform_name = "emmettbrown"
 }
@@ -42,7 +43,7 @@ module "adb-platform-emmettbrown" {
   tags                              = merge(var.tags, { "Domain" = "${local.eb_platform_name}" })
 } 
 
-
+ 
 module "adb-platform-emmettbrown-producer-assets" {
   depends_on                        = [module.adb-platform-emmettbrown]
   source                            = "../adb-platform-emmettbrown-assets/ws-data-nostrum"
@@ -106,8 +107,9 @@ module "adb-platform-cablemaster" {
   tags                              = merge(var.tags, { "Domain" = "${local.cm_platform_name}" })
 }
 
+
 module "adb-platform-cablemaster-producer-assets" {
-  depends_on                        = [module.adb-platform-cablemaster, module.slq-database]
+  depends_on                        = [module.adb-platform-cablemaster, module.slq-database, module.adb-platform-emmettbrown]
   source                            = "../adb-platform-cablemaster-assets/ws-producer"
   deploy_id                         = var.deploy_id
   deploy_env                        = var.cm_deploy_env
@@ -130,6 +132,7 @@ module "adb-platform-cablemaster-producer-assets" {
     databricks = databricks.cablemaster-producer-workspace
   }
 }
+
 
 module "adb-platform-cablemaster-consumer-assets" {
   depends_on                        = [module.adb-platform-cablemaster]

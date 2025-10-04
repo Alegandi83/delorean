@@ -40,6 +40,7 @@ data "databricks_user" "this" {
 
 # Creates Service Principals in Databricks Account
 resource "databricks_service_principal" "this" {
+  depends_on = [ databricks_metastore_assignment.this ]
   for_each = local.service_principals_map
   display_name = "sp-${var.deploy_id}-${var.deploy_env}-${var.component_name}-${each.value.service_principal}-${var.deploy_ver}"
   disable_as_user_deletion = false
@@ -97,6 +98,7 @@ resource "databricks_secret" "scr_oauth_uuid" {
 
 # Creates groups in Databricks Account
 resource "databricks_group" "this" {
+  depends_on = [ databricks_service_principal_role.sp_admin, databricks_metastore_assignment.this ]
   for_each = toset(compact(var.account_groups[*].name))
   display_name = "grp-${var.deploy_id}-${var.deploy_env}-${var.component_name}-${each.key}-${var.deploy_ver}"
 #  workspace_access = lookup(local.admin_groups_map, each.key, false)
@@ -108,6 +110,7 @@ resource "databricks_group" "this" {
 
 # Adds Users and Service Principals to associated Databricks Account group
 resource "databricks_group_member" "this" {
+  depends_on = [ databricks_group.this ]
   for_each = merge(local.users_map, local.service_principals_map)
   group_id  = databricks_group.this[each.value.name].id
   member_id = startswith(each.key, "user") ? data.databricks_user.this[each.key].id : databricks_service_principal.this[each.key].id

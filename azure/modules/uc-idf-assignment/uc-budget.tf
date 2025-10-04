@@ -1,4 +1,6 @@
 resource "databricks_budget" "this" {
+  
+  depends_on = [ databricks_mws_permission_assignment.this ]
   provider = databricks.account
   display_name = "bdg-${var.deploy_id}-${var.deploy_env}-${var.component_name}-${var.deploy_ver}"
 

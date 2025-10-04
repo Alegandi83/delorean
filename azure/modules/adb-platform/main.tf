@@ -106,7 +106,7 @@ locals {
   landing_name = "land"
 }
 module "adb-lakehouse-common-assets" {
-  depends_on                     = [module.adb-lakehouse-uc-metastore]
+  depends_on                     = [module.adb-lakehouse-uc-idf-assignment-producer]
   source                         = "../adb-lakehouse-uc/uc-common-assets"
   location                       = var.location
   storage_credential_name        = "dac-${var.deploy_id}-${var.deploy_env}-${local.metastore_name}-${var.deploy_ver}"
@@ -121,6 +121,7 @@ module "adb-lakehouse-common-assets" {
     databricks = databricks.producer-workspace
   }
 }
+
 
 locals {
   producer_assets_name = "producer-assets"
@@ -139,6 +140,7 @@ module "adb-lakehouse-producer-workspace-assets" {
   }
 }
 
+
 locals {
   consumer_assets_name = "consumer-assets"
 }
@@ -155,3 +157,4 @@ module "adb-lakehouse-consumer-workspace-assets" {
     databricks = databricks.consumer-workspace
   }
 }
+

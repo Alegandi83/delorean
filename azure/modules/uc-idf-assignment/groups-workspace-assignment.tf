@@ -1,7 +1,24 @@
 # Assigning Databricks Account group to Databricks Workspace
+
+/*
+data "databricks_user" "me" {
+  depends_on = [ databricks_group.this ]
+  user_name = "alessandro.gandini@databricks.com"
+  provider = databricks.account
+}
+resource "databricks_mws_permission_assignment" "me_user" {
+  
+  depends_on = [ data.databricks_user.me ]
+  workspace_id = var.workspace_id
+  principal_id = data.databricks_user.me.id
+  permissions  = ["ADMIN"]
+  provider = databricks.account
+}
+*/
+
 resource "databricks_mws_permission_assignment" "this" {
   provider = databricks.account
-  depends_on = [ databricks_group.this ]
+  depends_on = [ databricks_group_member.this ] // [ databricks_mws_permission_assignment.me_user ] 
   for_each = {
     for group in var.account_groups : group.name => group
     if group.name != null
@@ -15,6 +32,7 @@ resource "databricks_mws_permission_assignment" "this" {
     ignore_changes = [principal_id]
   } 
 }
+
 
 # Creates entitlements for ADMIN groups
 resource "databricks_entitlements" "admin_entitlements" {
