@@ -122,12 +122,27 @@ module "adb-platform-cablemaster-producer-assets" {
   adls_path                         = module.adb-platform-cablemaster.producer_storage_url
   github_usr                        = var.github_usr 
   github_tkn                        = var.github_tkn 
+  dbw_federated_url                 = module.adb-platform-emmettbrown.producer_workspace_url
+  dbw_federated_sql_http_path       = module.adb-platform-emmettbrown-producer-assets.sql_http_path
+  dbw_federated_pat                 = module.adb-platform-emmettbrown.producer_user_pat
   recipient_id                      = module.adb-platform-emmettbrown.platform_global_metastore_id
   recipient_name                    = local.eb_platform_name
   sql_server_host                   = module.slq-database.sql_server_name
   sql_database_name                 = module.slq-database.sql_database_name
+  postgresql_server_name            = module.slq-database.postgresql_server_name
+  postgresql_database_name          = module.slq-database.postgresql_database_name
   sql_admin_usr                     = var.sql_admin_usr
   sql_admin_psw                     = var.sql_admin_psw
+
+  eh_namespace                      = module.slq-database.eh_namespace
+  eh_entityname                     = module.slq-database.eh_entityname
+  eh_accessKeyName                  = module.slq-database.eh_accessKeyName
+  eh_accessKeyValue                 = module.slq-database.eh_accessKeyValue
+  ih_namespace                      = module.slq-database.ih_namespace
+  ih_entityname                     = module.slq-database.ih_entityname
+  ih_accessKeyName                  = module.slq-database.ih_accessKeyName
+  ih_accessKeyValue                 = module.slq-database.ih_accessKeyValue
+
   providers = {
     databricks = databricks.cablemaster-producer-workspace
   }

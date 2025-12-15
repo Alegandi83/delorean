@@ -51,3 +51,22 @@ resource "databricks_entitlements" "admin_entitlements" {
   allow_cluster_create        = true
   allow_instance_pool_create  = true
 }
+
+# -- User Personal Access Token -----------------
+
+# 1. Genera PAT token for current user
+resource "databricks_token" "pat" {
+  provider     = databricks.workspace  
+  comment  = "Terraform Provisioning"
+  // 100 day token
+  lifetime_seconds = 8640000
+}
+
+# 2. Salva PAT token nello scope
+resource "databricks_secret" "scr_pat_token" {
+  depends_on   = [ databricks_secret_scope.scr_scope, databricks_token.pat, databricks_entitlements.admin_entitlements ]
+  provider     = databricks.workspace  
+  key          = "scr-${var.deploy_id}-${var.deploy_env}-${var.component_name}-pat-${var.deploy_ver}-token"
+  string_value = databricks_token.pat.token_value
+  scope        = databricks_secret_scope.scr_scope.name
+}

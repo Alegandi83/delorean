@@ -61,3 +61,12 @@ output "consumer_storage_url" {
   value       = module.adb-lakehouse-consumer-workspace-assets.adls_path
 }
 
+output "producer_user_pat" {
+  value       = module.adb-lakehouse-uc-idf-assignment-producer.user_pat
+  description = "The user PAT token"
+}
+
+output "consumer_user_pat" {
+  value       = module.adb-lakehouse-uc-idf-assignment-consumer.user_pat
+  description = "The user PAT token"
+}

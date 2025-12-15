@@ -60,6 +60,8 @@ resource "databricks_service_principal_role" "sp_admin" {
   provider = databricks.account
 }
 
+
+
 # -- Service Principal OAuth secrets -----------------
 
 # 1. Genera OAuth secrets per ogni service principal

@@ -12,6 +12,8 @@ resource "databricks_cluster" "shared_autoscaling" {
   node_type_id            = data.databricks_node_type.smallest.id
   autotermination_minutes = 20
   no_wait                 = true 
+  data_security_mode = "SINGLE_USER"
+  single_user_name   = "alessandro.gandini@databricks.com"
   autoscale {
     min_workers = 1
     max_workers = 3
