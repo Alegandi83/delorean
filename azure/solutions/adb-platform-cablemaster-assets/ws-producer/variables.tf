@@ -112,6 +112,13 @@ variable "sql_admin_psw" {
   description = "The administrator password of the SQL logical server."
   sensitive   = true
 }
+
+variable "apitube_api_key" {
+  type        = string
+  description = "Apitube api key to authenticate to Apitube service"
+  sensitive   = true
+}
+
 variable "eh_namespace" {
   type        = string
   description = "Event Hub namespece to use in event hub ingestion pipelin"

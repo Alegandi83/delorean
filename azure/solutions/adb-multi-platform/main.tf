@@ -133,6 +133,7 @@ module "adb-platform-cablemaster-producer-assets" {
   postgresql_database_name          = module.slq-database.postgresql_database_name
   sql_admin_usr                     = var.sql_admin_usr
   sql_admin_psw                     = var.sql_admin_psw
+  apitube_api_key                   = var.apitube_tkn 
 
   eh_namespace                      = module.slq-database.eh_namespace
   eh_entityname                     = module.slq-database.eh_entityname

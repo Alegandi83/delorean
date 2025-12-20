@@ -9,7 +9,7 @@ resource "databricks_metastore" "databricks-metastore" {
 
   delta_sharing_organization_name = var.delta_sharing_organization_name
   delta_sharing_scope = "INTERNAL_AND_EXTERNAL"
-  delta_sharing_recipient_token_lifetime_in_seconds = 0
+  delta_sharing_recipient_token_lifetime_in_seconds = 2592000 # 30 days
 
 }
 

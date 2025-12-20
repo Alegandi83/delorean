@@ -7,7 +7,7 @@ account_id                      = "ccb842e7-2376-4152-b0b0-29fa952379b8"
 
 deploy_id                       = "ag83"
 deploy_prj                      = "test"        #project name
-deploy_ver                      = "005"         #version
+deploy_ver                      = "007"         #version
 
 eb_location                     = "westeurope"
 eb_deploy_env                   = "eb"          #environment / platform identifier
@@ -30,6 +30,7 @@ metastore_admins                = ["alessandro.gandini@databricks.com"]
 #github_usr                      = ""
 #github_tkn                      = ""
 
+#apitube_tkn                     = ""
 
 
 

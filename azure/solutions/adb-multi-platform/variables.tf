@@ -151,6 +151,13 @@ variable "github_tkn" {
   default     = null
 }
 
+variable "apitube_tkn" {
+  type        = string
+  description = "Apitube api key to authenticate to Apitube service"
+  sensitive   = true
+  default     = null
+}
+
 
 
 

@@ -41,3 +41,19 @@ resource "databricks_connection" "databricks_ws" {
     purpose = "external databricks data source"
   }
 }
+
+resource "databricks_connection" "apitube_Http" {
+  name            = "api-apitube-http"
+  connection_type = "HTTP"
+  comment         = "Created by TF"
+  options = {
+    host         = "https://api.apitube.io"
+    port         = "433"
+    base_path    = "/v1/news/everything"
+    bearer_token = var.apitube_api_key
+    is_mcp_connection = false
+  }
+  properties = {
+    purpose = "external http service"
+  }
+}
