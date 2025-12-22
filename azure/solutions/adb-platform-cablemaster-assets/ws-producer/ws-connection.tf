@@ -43,7 +43,8 @@ resource "databricks_connection" "databricks_ws" {
 }
 
 resource "databricks_connection" "apitube_Http" {
-  name            = "api-apitube-http"
+  #name            = "api-apitube-http"
+  name            = "apitube"
   connection_type = "HTTP"
   comment         = "Created by TF"
   options = {

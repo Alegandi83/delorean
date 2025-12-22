@@ -58,6 +58,11 @@ module "adb-platform-emmettbrown-producer-assets" {
   adls_path                         = module.adb-platform-emmettbrown.producer_storage_url
   github_usr                        = var.github_usr 
   github_tkn                        = var.github_tkn 
+
+  eh_namespace                      = module.slq-database.eh_namespace
+  eh_entityname                     = module.slq-database.eh_entityname
+  eh_accessKeyName                  = module.slq-database.eh_accessKeyName
+  eh_accessKeyValue                 = module.slq-database.eh_accessKeyValue
   providers = {
     databricks = databricks.emmettbrown-producer-workspace
   }

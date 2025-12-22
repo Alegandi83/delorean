@@ -56,3 +56,23 @@ variable "github_tkn" {
   sensitive   = true
   default     = null
 }
+
+variable "eh_namespace" {
+  type        = string
+  description = "Event Hub namespece to use in event hub ingestion pipelin"
+}
+variable "eh_entityname" {
+  type        = string
+  description = "Event Hub entity name to use in event hub ingestion pipelin"
+}
+
+variable "eh_accessKeyName" {
+  type        = string
+  description = "Event Hub accessKeyName to use in event hub ingestion pipelin"
+}
+
+variable "eh_accessKeyValue" {
+  type        = string
+  sensitive   = true
+  description = "Event Hub accessKeyValue to use in event hub ingestion pipelin"
+}
