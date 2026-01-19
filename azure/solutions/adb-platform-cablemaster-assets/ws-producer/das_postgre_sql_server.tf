@@ -4,7 +4,7 @@ resource "databricks_catalog" "das_postgre_sql_database" {
   name            = "das_azure_postgres_database"
   connection_name = databricks_connection.postgre_sql_db.name
   comment         = "Managed from Terraform"
-  isolation_mode  = "ISOLATED"
+  isolation_mode  = "OPEN"
   force_destroy = true
   options = {
     database = var.postgresql_database_name

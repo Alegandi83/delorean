@@ -49,7 +49,7 @@ resource "databricks_connection" "apitube_Http" {
   comment         = "Created by TF"
   options = {
     host         = "https://api.apitube.io"
-    port         = "433"
+    port         = "443"
     base_path    = "/v1/news/everything"
     bearer_token = var.apitube_api_key
     is_mcp_connection = false
