@@ -1,8 +1,9 @@
 locals {
   domain_tag_key = "tag_${var.deploy_id}_${var.domain.name}_${var.deploy_ver}"
+  # The Domains API requires subdomain tag keys in the form <parent tag key>/<subdomain name>
   subdomain_tag_keys = {
     for name, subdomain in var.subdomains :
-    name => "tag_${var.deploy_id}_${name}_${var.deploy_ver}"
+    name => "${local.domain_tag_key}/${name}"
   }
 }
 

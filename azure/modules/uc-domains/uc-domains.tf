@@ -1,8 +1,8 @@
 locals {
-  domain_name = "dom_${var.deploy_id}_${var.domain.name}_${var.deploy_ver}"
+  domain_name = "dom-${var.deploy_id}-${replace(var.domain.name, "_", "-")}-${var.deploy_ver}"
   subdomain_names = {
     for name, subdomain in var.subdomains :
-    name => "dom_${var.deploy_id}_${name}_${var.deploy_ver}"
+    name => "dom-${var.deploy_id}-${replace(name, "_", "-")}-${var.deploy_ver}"
   }
 }
 

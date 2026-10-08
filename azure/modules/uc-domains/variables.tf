@@ -18,7 +18,7 @@ variable "domain" {
       color = string
     })
   })
-  description = "(Required) The top-level Discover domain. name is used to build the domain name dom_<deploy_id>_<name>_<deploy_ver> and the governed tag key tag_<deploy_id>_<name>_<deploy_ver>"
+  description = "(Required) The top-level Discover domain. name is used to build the domain name dom-<deploy_id>-<name>-<deploy_ver> and the governed tag key tag_<deploy_id>_<name>_<deploy_ver>"
 }
 
 variable "subdomains" {
@@ -30,7 +30,7 @@ variable "subdomains" {
       color = string
     })
   }))
-  description = "(Optional) Subdomains of the domain, keyed by subdomain name. Each one is named dom_<deploy_id>_<key>_<deploy_ver> and gets its own governed tag tag_<deploy_id>_<key>_<deploy_ver>"
+  description = "(Optional) Subdomains of the domain, keyed by subdomain name. Each one is named dom-<deploy_id>-<key>-<deploy_ver> and gets its own governed tag tag_<deploy_id>_<domain>_<deploy_ver>/<key>"
   default     = {}
 }
 
