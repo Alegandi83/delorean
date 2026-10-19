@@ -30,3 +30,5 @@
 .vscode/
 
 .idea/
+# Terraform saved plans (contain variable values, including secrets)
+tfplan*

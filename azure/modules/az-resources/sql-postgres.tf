@@ -15,6 +15,10 @@ resource "azurerm_postgresql_flexible_server" "psqlserver" {
   administrator_password       = var.admin_password
   version                      = "17"
 
+  tags = {
+    owner = "alessandro.gandini@databricks.com"
+  }
+
 }
 
 resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_all" {

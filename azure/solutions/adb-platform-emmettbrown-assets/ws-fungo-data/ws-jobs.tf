@@ -2,7 +2,7 @@ resource "databricks_job" "this" {
   depends_on        = [databricks_repo.delorean]
   name              = "00 - EmmettBrown FunGo Data Setup"
   description       = "This Job executes the EmmettBrown FunGo Data setup tasks."
-  budget_policy_id  = var.budget_policy_id
+//  budget_policy_id  = var.budget_policy_id
 
   task {
     task_key = "Marketing_Advertising-Customer_Churn_Analytics"

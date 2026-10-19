@@ -23,10 +23,12 @@ output "producer_workspace_url" {
   value       = module.adb-lakehouse-producer.workspace_url
 }
 
+/*
 output "producer_budget_policy_id" {
   description = "The Budget Policy ID"
   value       = module.adb-lakehouse-uc-idf-assignment-producer.budget_policy_id
 }
+*/
 
 
 output "producer_storage_url" {
@@ -50,11 +52,12 @@ output "consumer_workspace_url" {
   value       = module.adb-lakehouse-consumer.workspace_url
 }
 
+/*
 output "consumer_budget_policy_id" {
   description = "The Budget Policy ID"
   value       = module.adb-lakehouse-uc-idf-assignment-consumer.budget_policy_id
 }
-
+*/
 
 output "consumer_storage_url" {
   description = "The Databricks consumer storage URL"
