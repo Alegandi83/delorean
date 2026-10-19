@@ -14,7 +14,7 @@ resource "databricks_app" "this" {
     {
       name = "serving-endpoint"
       serving_endpoint = {
-        name       = "databricks-meta-llama-3-3-70b-instruct"
+        name       = "databricks-llama-4-maverick"
         permission = "CAN_QUERY"
       }
     }]

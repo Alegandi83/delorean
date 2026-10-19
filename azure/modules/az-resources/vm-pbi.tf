@@ -3,6 +3,11 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+
+  tags = {
+    owner = "alessandro.gandini@databricks.com"
+  }
+
 }
 
 resource "azurerm_subnet" "subnet" {
@@ -29,6 +34,11 @@ resource "azurerm_network_security_group" "powerbi_nsg" {
     source_address_prefix      = "1.0.0.0/8"
     destination_address_prefix = "*"
   }
+
+  tags = {
+    owner = "alessandro.gandini@databricks.com"
+  }
+
 }
 
 # Creare un'interfaccia di rete per la VM
@@ -44,6 +54,11 @@ resource "azurerm_network_interface" "powerbi_nic" {
     private_ip_address_allocation = "Dynamic"
   //  public_ip_address_id          = azurerm_public_ip.powerbi_pip.id
   }
+
+  tags = {
+    owner = "alessandro.gandini@databricks.com"
+  }
+  
 }
 
 
@@ -53,6 +68,11 @@ resource "azurerm_public_ip" "powerbi_pip" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   allocation_method   = "Static"
+
+  tags = {
+    owner = "alessandro.gandini@databricks.com"
+  }
+
 }
 
 resource "azurerm_network_interface_security_group_association" "powerbi_nsg_association" {
@@ -67,6 +87,11 @@ resource "azurerm_storage_account" "powerbi_storage" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+
+  tags = {
+    owner = "alessandro.gandini@databricks.com"
+  }
+
 }
 
 resource "azurerm_windows_virtual_machine" "powerbi_vm" {
@@ -90,14 +115,19 @@ resource "azurerm_windows_virtual_machine" "powerbi_vm" {
 
 source_image_reference {
   publisher = "MicrosoftWindowsDesktop"
-  offer     = "Windows-10"
-  sku       = "win10-21h2-pro"
+  offer     = "windows-11"
+  sku       = "win11-24h2-pro"
   version   = "latest"
 }
 
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.powerbi_storage.primary_blob_endpoint
   }
+
+  tags = {
+    owner = "alessandro.gandini@databricks.com"
+  }
+
 }
 
 /*
